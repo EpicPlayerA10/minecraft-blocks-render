@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const yargs = require("yargs");
+import yargs from "yargs";
 const commands = {
-  grab: require('../lib/grab'),
-  render: require('../lib/render')
+  grab: (await import('../lib/grab.js')).default,
+  render: (await import('../lib/render.js')).default
 }
 
 const options = yargs
@@ -58,4 +58,5 @@ const options = yargs
   .argv;
 
 // Start command. Incorrect commands can't pass here due .strict()
+console.log(options._[0])
 commands[options._[0]](options);
